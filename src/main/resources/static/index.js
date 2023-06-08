@@ -23,6 +23,7 @@ const changeLayerButton = $('#changeLayer').click(loadHeruptions).html('Load Her
 const baseHeruptionsUrl = 'geodata/heruptions/';
 let heruptionsLayer;
 
+const heatmapGradient = $('#heatmap-gradient').hide();
 const showYear = $('#showYear').hide();
 const changeYearRange = $('#changeYear').hide().on('input', function () {
     map.removeLayer(heruptionsLayer);
@@ -117,6 +118,7 @@ function loadHeruptions() {
     changeLayerButton.off('click').click(loadVolcanoes).html('Load Volcanoes');
     showYear.show().html(2000);
     changeYearRange.show().val(2000);
+    heatmapGradient.show();
 }
 
 function loadVolcanoes() {
@@ -139,6 +141,7 @@ function loadVolcanoes() {
     changeLayerButton.off('click').click(loadHeruptions).html('Load Heruptions');
     showYear.hide();
     changeYearRange.hide();
+    heatmapGradient.hide();
 }
 
 function printProperty(propertyName, property) {
