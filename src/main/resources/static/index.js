@@ -11,7 +11,7 @@ const gmapBaseLayer = L.tileLayer('http://mt0.google.com/vt/lyrs=s&hl=en&x={x}&y
 const osmBaseLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}).addTo(map);
+});
 
 layersControl.addBaseLayer(osmBaseLayer, "OpenStreetMap");
 layersControl.addBaseLayer(gmapBaseLayer, "Satellite");

@@ -33,7 +33,10 @@ In this section we introduce technical information and installing guides!
 
 ## Installing and running the project
 
-Follow these steps:
+You can visit the site at the following
+link [VolcanoesHub](https://losor2002.github.io/VolcanoesHub/src/main/resources/static/)
+
+Or follow these steps:
 
 2. Download Java SE 17;
 3. Clone this repo;
