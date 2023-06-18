@@ -52,6 +52,7 @@ const searchVolcanoButton = $('#searchVolcanoButton').click(function () {
     }
 });
 
+const volcanoesTypesContainer = $('#volcanoesTypesContainer');
 let volcanoesTypesCheckboxes;
 getJsonVolcanoes.done(function () {
     const volcanoesTypes = [];
@@ -61,7 +62,7 @@ getJsonVolcanoes.done(function () {
     volcanoesTypes.filter((value, index, array) => {
         return array.indexOf(value) === index;
     }).sort().forEach((type, i) => {
-        $('#volcanoesTypesContainer').append(`<div class="col-6">
+        volcanoesTypesContainer.append(`<div class="col-6">
 <div class="form-check form-switch">
 <input type="checkbox" class="form-check-input" role="switch" name="volcanoesTypes" id="volcanoType${i}" value="${type}" checked>
 <label class="form-check-label" for="volcanoType${i}">${type}</label>
@@ -71,7 +72,7 @@ getJsonVolcanoes.done(function () {
     volcanoesTypesCheckboxes = $('input[name="volcanoesTypes"]').click(function () {
         map.removeLayer(volcanoesLayer);
 
-        const types = volcanoesTypesCheckboxes.find(':checked').map(function () {
+        const types = volcanoesTypesCheckboxes.filter(':checked').map(function () {
             return $(this).val();
         }).get();
 
@@ -80,7 +81,28 @@ getJsonVolcanoes.done(function () {
         if (positionMarker != null) {
             locate(false);
         }
-    }).parent().parent();
+
+        if (volcanoesTypesCheckboxes.length === types.length) {
+            allVolcanoTypes.prop("checked", true);
+        } else {
+            allVolcanoTypes.prop("checked", false);
+        }
+    });
+});
+const allVolcanoTypes = $("#allVolcanoTypes").click(function () {
+    map.removeLayer(volcanoesLayer);
+
+    if ($(this).is(":checked")) {
+        volcanoesTypesCheckboxes.prop("checked", true);
+        addVolcanoesToMap([], true);
+    } else {
+        volcanoesTypesCheckboxes.prop("checked", false);
+        addVolcanoesToMap([]);
+    }
+
+    if (positionMarker != null) {
+        locate(false);
+    }
 });
 
 let positionMarker;
@@ -116,7 +138,7 @@ function loadHeruptions() {
     addHeruptionsToMap(baseHeruptionsUrl + 'heruptions2000.png');
     searchVolcanoText.hide();
     searchVolcanoButton.hide();
-    volcanoesTypesCheckboxes.hide();
+    volcanoesTypesContainer.hide();
     locateInput.hide();
     removeLocation.hide();
 
@@ -137,7 +159,7 @@ function loadVolcanoes() {
     volcanoesLayer.addTo(map);
     searchVolcanoText.show();
     searchVolcanoButton.show();
-    volcanoesTypesCheckboxes.show();
+    volcanoesTypesContainer.show();
     locateInput.show();
     if (positionMarker != null) {
         removeLocation.show();
