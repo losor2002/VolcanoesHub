@@ -61,7 +61,12 @@ getJsonVolcanoes.done(function () {
     volcanoesTypes.filter((value, index, array) => {
         return array.indexOf(value) === index;
     }).sort().forEach((type, i) => {
-        $('#volcanoesTypesContainer').append(`<div class="col"><input type="checkbox" class="btn-check" name="volcanoesTypes" id="volcanoType${i}" value="${type}" checked><label class="btn btn-outline-danger" for="volcanoType${i}">${type}</label></div>`);
+        $('#volcanoesTypesContainer').append(`<div class="col-6">
+<div class="form-check form-switch">
+<input type="checkbox" class="form-check-input" role="switch" name="volcanoesTypes" id="volcanoType${i}" value="${type}" checked>
+<label class="form-check-label" for="volcanoType${i}">${type}</label>
+</div>
+</div>`);
     });
     volcanoesTypesCheckboxes = $('input[name="volcanoesTypes"]').click(function () {
         map.removeLayer(volcanoesLayer);
